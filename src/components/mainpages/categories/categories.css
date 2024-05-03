@@ -1,0 +1,49 @@
+/* contenedor */
+.categories{
+    max-width: 700px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 30px auto;
+}
+/* form completo con el label, input y button contenedor */
+.categories form{
+    width: 290px;
+    margin-bottom: 20px;
+}
+/* laberl C A T E G O R Y */
+.categories label{
+    display: block;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+/* input y button Save */
+.categories input, button{
+    height: 35px;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #444;
+}
+/* input */
+.categories input{
+    width: 210px;
+}
+/* botones los tres */
+.categories button{
+    width: 70px;
+    background: #666;
+    color: white;
+    margin-left: 10px;
+}
+/* Categorias contentedor */
+.categories .row{
+    min-width: 290px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+}

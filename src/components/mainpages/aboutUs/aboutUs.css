@@ -1,0 +1,48 @@
+
+/* AboutUs.css */
+.about-us-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.about-us-content {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.about-us-content section {
+  flex: 0 0 calc(33.333% - 20px); /* Ancho del 33.333% menos márgenes entre secciones */
+  margin-bottom: 30px;
+  padding: 30px; /* Mayor relleno para más espacio */
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  color: #585353; /* Texto blanco para mayor contraste */
+  border: 2px solid #03a5ce;
+}
+
+.about-us-content section h2 {
+  color: #585353; /* Texto blanco para mayor contraste */
+}
+
+.about-us-content section p {
+  color: #585353; /* Texto blanco para mayor contraste */
+}
+
+
+
+
+
+.about-us-container img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin: 0 auto; /* Centra la imagen */
+  display: block; /* Asegura que la imagen sea un bloque para aplicar márgenes automáticamente */
+  margin-bottom: 10px;
+}
+
