@@ -7,6 +7,10 @@ import Loading from '../utils/loading/Loading'
 import Filters from './Filters'
 import LoadMore from './LoadMore'
 
+
+import { Carousel } from 'antd';
+import { LeftOutlined, RightOutlined } from '@ant-design/icons'; // Importa los iconos de Ant Design
+
 function Products() {
 
     const state = useContext(GlobalState) 
@@ -26,6 +30,8 @@ function Products() {
     // variables nuevas
     const [loading, setLoading] = useState(false)
     const [isChecked, setIsChecked] = useState(false)
+
+
 
 
     const handleCheck = (id) => {
@@ -77,10 +83,14 @@ function Products() {
 
     if(loading) return  <Loading />   
 
+
+
     return (
         <>  
 
             <Filters />
+
+
 
             {
                 isAdmin && 

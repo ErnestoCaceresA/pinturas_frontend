@@ -1,8 +1,11 @@
 import React, {useContext, useState, useEffect} from 'react'
 import axios from 'axios'
 
-// import PaypalButton from './PaypalButton'
+import PaypalButton from './PaypalButton'
 import {GlobalState} from '../../../GlobalState'
+
+
+import { Card, CardHeader, CardBody, CardFooter, Image, Stack, Heading, Text, Button, Divider, ButtonGroup, Grid, GridItem } from '@chakra-ui/react'
 
 function Cart() {
 
@@ -76,19 +79,30 @@ function Cart() {
 
     // funcion para boton Paypal
     const tranSuccess = async(payment) => {
-        // 
-        // // console.log(payment) //imprime toda la informacion del pago
-        //
-        // const {paymentID, address} = payment;
-        // // consumir API para el payment en el backend para que lo procese (cambie la cantidad de vendidos del producto) y guarde en la base de datos el pedido
-        // await axios.post('/api/payment', {cart, paymentID, address}, {
-        //     headers: {Authorization: token}
-        // })
-        // // ya que se hizo el pago limpiar el carrito con setCart() pasandole un arreglo vacio y despues el addToCart para que lo guarde en la base de datos
-        // setCart([])
-        // addToCart([])
-        // alert('!Usted a hecho un pedido exitosamente!')
-        // // setCallback(!callback)
+        
+        console.log(payment) //imprime toda la informacion del pago
+
+        const address = payment.payer.address;
+        const paymentID = payment.id;
+
+        console.log(address)
+        console.log(paymentID)
+        
+        //const {paymentID, address} = payment;
+        
+        // consumir API para el payment en el backend para que lo procese (cambie la cantidad de vendidos del producto) y guarde en la base de datos el pedido
+        await axios.post('/api/payment', {cart, paymentID, address}, {
+            headers: {Authorization: token}
+        })
+        
+        
+        // ya que se hizo el pago limpiar el carrito con setCart() pasandole un arreglo vacio y despues el addToCart para que lo guarde en la base de datos
+        
+        setCart([])
+        addToCart([])
+        alert('!Usted a hecho un pedido exitosamente!')
+        
+        // setCallback(!callback)
     }
 
 
@@ -97,35 +111,55 @@ function Cart() {
     return (
         <div>
             {
-                cart.map(product => (
-                    <div className="detail cart" key={product._id}>
-                        <img src={product.images.url} alt=" " />
-                        <div className="box-detail">
-                            <h2>{product.title}</h2>
 
-                            <h3>${product.price * product.quantity}</h3>
-                            <p>{product.description}</p>
-                            <p className="content">{product.content}</p>
-
+                <Grid templateColumns="repeat(auto-fill, minmax(300px, 1fr))" gap={6}>
+                    {cart.map(product => (
+                        <GridItem key={product.id}>
+                            <Card maxW='sm' h="100%">
+                            <CardBody>
+                                <Image
+                                src={product.images.url}
+                                alt={product.title}
+                                borderRadius='lg'
+                                h="200px" // Altura fija para la imagen
+                                objectFit="cover" // Ajustar imagen dentro del tamaño especificado
+                                />
+                                <Stack mt='6' spacing='3'>
+                                <Heading size='md'>${product.title}</Heading>
+                                <Text>
+                                    {product.description.length > 70 ? `${product.description.substring(0, 70)}...` : product.description}
+                                </Text>
+                                <Text>
+                                    {product.content.length > 40 ? `${product.content.substring(0, 40)}...` : product.content}
+                                </Text>
+                                <Text color='blue.600' fontSize='2xl'>
+                                    ${product.price * product.quantity}
+                                </Text>
+                                </Stack>
+                            </CardBody>
+                            <Divider />
+                            <CardFooter>
                             <div className="amount">
                                 <button onClick={() => decrement(product._id)}> - </button>
                                 <span> {product.quantity} </span>
                                 <button onClick={() => increment(product._id)}> + </button>
                             </div>
-
                             <div className="delete" onClick={() => removeProduct(product._id)}>X</div>
-                        </div>
-                    </div>
-                ))
+                            </CardFooter>
+                            </Card>
+                        </GridItem>
+                    ))}
+                </Grid>
+
             }
 
             <div className="total">
                 <h3>Total: $ {total}</h3>
                 {/* Boton del componente Paypal creado con react-paypal-express-checkout*/}
-                {/*<PaypalButton
+                <PaypalButton
                     total={total}
                     tranSuccess={tranSuccess}
-                />*/}
+                />
             </div>
         </div>
     )

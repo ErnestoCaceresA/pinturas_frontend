@@ -1,5 +1,7 @@
 import React from 'react';
-import PaypalExpressBtn from 'react-paypal-express-checkout';
+//import PaypalExpressBtn from 'react-paypal-express-checkout';
+
+import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 
 /* ----------------------------------------------------------------------------------------
  react-paypal-express-checkout  - npm package, Full Example documentation, crea un boton ya configurado,
@@ -8,7 +10,7 @@ import PaypalExpressBtn from 'react-paypal-express-checkout';
   -cambiar "total" con el valor total de la compra (se pasa en los props como argumento)
   ----------------------------------------------------------------------------------------*/
 
-export default class PaypalButton extends React.Component {
+/*export default class PaypalButton extends React.Component {
     render() {
         const onSuccess = (payment) => {
             // Congratulation, it came here means everything's fine!
@@ -65,6 +67,54 @@ export default class PaypalButton extends React.Component {
                 onCancel={onCancel} 
                 // style={style}
             />
+        );
+    }
+}*/
+
+
+
+export default class PaypalButton extends React.Component {
+    render() {
+        const initialOptions = {
+            "client-id": process.env.REACT_APP_PAYPAL_CLIENT_ID || 'AS_RCgiLjYx6rfs1GdT4hEoMflavbhE4kO5wCgMkprh-2trq7DJL7IfECtZQkOnolgXQ8y6syfFpCFd0',
+            currency: 'MXN',
+            intent: 'capture',
+        };
+
+        const createOrder = (data, actions) => {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: this.props.total,
+                    },
+                }],
+            });
+        };
+
+        const onApprove = (data, actions) => {
+            return actions.order.capture().then((details) => {
+                console.log("The payment was succeeded!", details);
+                this.props.tranSuccess(details);
+            });
+        };
+
+        const onCancel = (data) => {
+            console.log('The payment was cancelled!', data);
+        };
+
+        const onError = (err) => {
+            console.log("Error!", err);
+        };
+
+        return (
+            <PayPalScriptProvider options={initialOptions}>
+                <PayPalButtons
+                    createOrder={createOrder}
+                    onApprove={onApprove}
+                    onCancel={onCancel}
+                    onError={onError}
+                />
+            </PayPalScriptProvider>
         );
     }
 }

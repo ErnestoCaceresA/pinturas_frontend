@@ -21,6 +21,9 @@ import CreateProduct from './components/mainpages/createProduct/CreateProduct';
 import AboutUs from './components/mainpages/aboutUs/aboutUs.js'
 
 
+import { ChakraProvider } from '@chakra-ui/react'
+
+
 function App() {
 
 
@@ -31,54 +34,57 @@ function App() {
   */}
 
   return (
-    <DataProvider>
-      <Router>
-        <div className="App">
-          <Header />
+
+    <ChakraProvider>
+      <DataProvider>
+        <Router>
+          <div className="App">
+            <Header />
 
 
 
-          <Routes>
+            <Routes>
 
 
 
-            {/*<Route path="/" element={<Products />} />
-            <Route path="/detail/:id" element={<DetailProduct />} />
-            <Route path="/login" element={isLogged ? <NotFound /> : <Login/> }/>
-            <Route path="/register" element={isLogged ? <NotFound /> : <Register/> }/>
-            <Route path="/category" element={isAdmin ? <Categories /> : <NotFound/> }/>
-            <Route path="/create_product" element={isAdmin ? <CreateProduct /> : <NotFound/> }/>
-            <Route path="/edit_product/:id" element={isAdmin ? <CreateProduct /> : <NotFound/> }/>
-            <Route path="/history" element={isLogged ? <OrderHistory /> : <NotFound/> }/>
-            <Route path="/history/:id" element={isLogged ? <OrderDetails /> : <NotFound/> }/>
-            <Route path="/cart" element={<Cart />} />
-            */}
+              {/*<Route path="/" element={<Products />} />
+              <Route path="/detail/:id" element={<DetailProduct />} />
+              <Route path="/login" element={isLogged ? <NotFound /> : <Login/> }/>
+              <Route path="/register" element={isLogged ? <NotFound /> : <Register/> }/>
+              <Route path="/category" element={isAdmin ? <Categories /> : <NotFound/> }/>
+              <Route path="/create_product" element={isAdmin ? <CreateProduct /> : <NotFound/> }/>
+              <Route path="/edit_product/:id" element={isAdmin ? <CreateProduct /> : <NotFound/> }/>
+              <Route path="/history" element={isLogged ? <OrderHistory /> : <NotFound/> }/>
+              <Route path="/history/:id" element={isLogged ? <OrderDetails /> : <NotFound/> }/>
+              <Route path="/cart" element={<Cart />} />
+              */}
 
 
 
-            <Route path="/" element={<Products />} />
-            <Route path="/login" element={ <Login/> }/>
-            <Route path="/register" element={ <Register/> }/>
-            <Route path="/detail/:id" element={<DetailProduct />} />
-            <Route path="/category" element={<Categories />}/>
-            <Route path="/create_product" element={<CreateProduct />}/>
-            <Route path="/edit_product/:id" element={<CreateProduct /> }/>
-            <Route path="/history" element={ <OrderHistory /> }/>
-            <Route path="/history/:id" element={<OrderDetails />}/>
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/aboutUs" element={<AboutUs />} />
-            
-            
+              <Route path="/" element={<Products />} />
+              <Route path="/login" element={ <Login/> }/>
+              <Route path="/register" element={ <Register/> }/>
+              <Route path="/detail/:id" element={<DetailProduct />} />
+              <Route path="/category" element={<Categories />}/>
+              <Route path="/create_product" element={<CreateProduct />}/>
+              <Route path="/edit_product/:id" element={<CreateProduct /> }/>
+              <Route path="/history" element={ <OrderHistory /> }/>
+              <Route path="/history/:id" element={<OrderDetails />}/>
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/aboutUs" element={<AboutUs />} />
+              
+              
 
 
-          </Routes>
+            </Routes>
 
 
 
-        {/*<Pages />*/}
-        </div>
-      </Router>
-    </DataProvider>
+          {/*<Pages />*/}
+          </div>
+        </Router>
+      </DataProvider>
+    </ChakraProvider>
   );
 }
 
